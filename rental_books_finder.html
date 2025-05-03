@@ -381,6 +381,7 @@
         <label for="book-id">検索する書籍ID</label>
         <button id="scan-book-id-button">書籍IDをスキャン</button>
         <input type="text" id="book-id" name="bookId" placeholder="スキャンするか手入力してください">
+        <button id="search-book-button" class="btn-utility">検索</button>
         <div id="interactive" class="viewport"></div>
       </div>
 
@@ -805,6 +806,18 @@
       document.getElementById('book-id').addEventListener('keypress', (event) => {
         if (event.key === 'Enter' && !isScanning) {
           searchRentalRecords();
+        }
+      });
+      
+      // 検索ボタンのイベントリスナー
+      document.getElementById('search-book-button').addEventListener('click', () => {
+        if (!isScanning) {
+          const bookId = document.getElementById('book-id').value.trim();
+          if (bookId) {
+            searchRentalRecords();
+          } else {
+            setMessage("書籍IDを入力してください。");
+          }
         }
       });
     </script>

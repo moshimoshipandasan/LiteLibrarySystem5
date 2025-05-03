@@ -390,6 +390,7 @@
         <label for="user-id">利用者ID</label>
         <button id="scan-user-id-button">利用者IDをスキャン</button>
         <input type="text" id="user-id" name="userId" placeholder="スキャンするか手入力してください">
+        <button id="search-user-button" class="btn-utility">検索</button>
         <div id="interactive" class="viewport"></div>
       </div>
 
@@ -854,6 +855,18 @@
       document.getElementById('user-id').addEventListener('keypress', (event) => {
         if (event.key === 'Enter' && !isScanning) {
           searchUserRentals();
+        }
+      });
+      
+      // 検索ボタンのイベントリスナー
+      document.getElementById('search-user-button').addEventListener('click', () => {
+        if (!isScanning) {
+          const userId = document.getElementById('user-id').value.trim();
+          if (userId) {
+            searchUserRentals();
+          } else {
+            setMessage("利用者IDを入力してください。");
+          }
         }
       });
     </script>

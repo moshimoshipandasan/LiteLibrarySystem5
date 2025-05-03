@@ -409,6 +409,7 @@
         <label for="user-id">利用者ID</label>
          <button id="scan-user-button">利用者IDをスキャン</button>
          <input type="text" id="user-id" name="userId" placeholder="スキャンするか手入力してください">
+         <button id="search-user-button" class="btn-utility">検索</button>
          <div id="interactive-user" class="viewport" style="display: none;"></div> <!-- 初期非表示 -->
       </div>
 
@@ -425,6 +426,7 @@
             <label for="book-id">書籍ID（連続スキャン可能）</label>
             <button id="scan-book-id-button">書籍IDをスキャン</button>
             <input type="text" id="book-id" name="bookId" placeholder="利用者ID確定後にスキャンしてください" readonly> <!-- 初期はReadOnly -->
+            <button id="search-book-button" class="btn-utility">検索</button>
             <div id="interactive" class="viewport" style="display: none;"></div> <!-- 初期非表示 -->
           </div>
 
@@ -496,6 +498,18 @@
              }
           }
         });
+        // 書籍ID検索ボタン
+        document.getElementById('search-book-button').addEventListener('click', () => {
+          // fieldsetが有効な場合のみ処理
+          if (!document.getElementById('book-section').disabled && !bookIdScanning) {
+            const bookId = document.getElementById('book-id').value.trim();
+            if (bookId) {
+              addBookToList(bookId); // 手入力されたIDを追加
+            } else {
+              setMessage("書籍IDを入力してください。");
+            }
+          }
+        });
 
         // 利用者IDスキャンボタン
         document.getElementById('scan-user-button').addEventListener('click', () => {
@@ -509,6 +523,17 @@
         document.getElementById('user-id').addEventListener('keypress', (event) => {
           if (event.key === 'Enter' && !userScanning) {
             fetchUserInfo(event.target.value.trim());
+          }
+        });
+        // 利用者ID検索ボタン
+        document.getElementById('search-user-button').addEventListener('click', () => {
+          if (!userScanning) {
+            const userId = document.getElementById('user-id').value.trim();
+            if (userId) {
+              fetchUserInfo(userId);
+            } else {
+              setMessage("利用者IDを入力してください。");
+            }
           }
         });
       }
