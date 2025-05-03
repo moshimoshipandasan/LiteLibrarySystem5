@@ -67,8 +67,8 @@
         background-color: #e9ecef;
         cursor: not-allowed;
       }
+      /* 基本ボタンスタイル */
       button {
-        background-color: #0056b3;
         color: white;
         padding: 45px 60px; /* ボタンのパディングを3倍に拡大 */
         border: none;
@@ -82,48 +82,64 @@
         -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを無効化 */
         touch-action: manipulation; /* タッチ操作の最適化 */
         min-height: 132px; /* タッチターゲットを3倍に拡大 */
+        background-color: #0056b3; /* 基本は青色 */
       }
       button:hover {
         background-color: #004494;
       }
-      /* スキャンボタンは少し小さく */
-      #scan-book-id-button, #scan-user-button {
-         padding: 36px 60px; /* スキャンボタンのパディングを3倍に拡大 */
-         background-color: #6c757d; /* グレー系 */
-         margin-right: 30px; /* 3倍に拡大 */
-         font-size: 48px; /* フォントサイズを3倍に拡大 */
-         font-weight: 400; /* 通常の太さ */
-      }
-       #scan-book-id-button:hover, #scan-user-button:hover {
-         background-color: #5a6268;
-      }
-      /* メインの登録/検索/返却ボタン */
-      button[onclick="submitForm()"],
-      button[onclick="fetchLendingInfo()"], /* 他のHTML用 */
-      button[onclick="searchRentalRecords()"] /* 他のHTML用 */
-       {
-          display: block; /* ブロック要素にして幅を100%に */
-          width: 100%;
-          margin-top: 75px; /* 3倍に拡大 */
-          background-color: #28a745; /* 成功の色 */
-          padding: 45px 60px; /* ボタンのパディングを3倍に拡大 */
-          font-size: 54px; /* ボタン文字サイズを3倍に拡大 */
-          min-height: 150px; /* タッチターゲットを3倍に拡大 */
-      }
-      button[onclick="submitForm()"]:hover {
-          background-color: #218838;
+      button:disabled {
+        background-color: #cccccc;
+        color: #999999;
+        cursor: not-allowed;
+        opacity: 0.7;
+        border: 3px solid #bbbbbb; /* 3倍に拡大 */
+        box-shadow: none;
       }
       
-      /* キャンセルボタン */
-      .cancel-button {
-          background-color: #dc3545; /* 赤色系 */
-          margin-top: 45px; /* 3倍に拡大 */
-          padding: 45px 60px; /* 3倍に拡大 */
-          font-size: 48px; /* 3倍に拡大 */
-          min-height: 132px; /* タッチターゲットを3倍に拡大 */
+      /* 機能別ボタン */
+      /* 補助ボタン - スキャン・検索用 */
+      .btn-utility, #scan-book-id-button, #scan-user-button {
+        padding: 36px 60px; /* スキャンボタンのパディングを3倍に拡大 */
+        background-color: #6c757d; /* グレー系 */
+        margin-right: 30px; /* 3倍に拡大 */
+        font-size: 48px; /* フォントサイズを3倍に拡大 */
+        font-weight: 400; /* 通常の太さ */
       }
-      .cancel-button:hover {
-          background-color: #c82333;
+      .btn-utility:hover, #scan-book-id-button:hover, #scan-user-button:hover {
+        background-color: #5a6268;
+      }
+      .btn-utility:disabled, #scan-book-id-button:disabled, #scan-user-button:disabled {
+        background-color: #cccccc;
+      }
+      
+      /* アクションボタン - 登録・貸出用 */
+      .btn-action, button[onclick="submitForm()"],
+      button[onclick="fetchLendingInfo()"], /* 他のHTML用 */
+      button[onclick="searchRentalRecords()"] /* 他のHTML用 */ {
+        display: block; /* ブロック要素にして幅を100%に */
+        width: 100%;
+        margin-top: 75px; /* 3倍に拡大 */
+        background-color: #28a745; /* 緑色 - 成功の色 */
+        padding: 45px 60px; /* ボタンのパディングを3倍に拡大 */
+        font-size: 54px; /* ボタン文字サイズを3倍に拡大 */
+        min-height: 150px; /* タッチターゲットを3倍に拡大 */
+      }
+      .btn-action:hover, button[onclick="submitForm()"]:hover,
+      button[onclick="fetchLendingInfo()"]:hover,
+      button[onclick="searchRentalRecords()"]:hover {
+        background-color: #218838;
+      }
+      
+      /* 危険ボタン - 返却・キャンセル用 */
+      .btn-danger, .cancel-button {
+        background-color: #dc3545; /* 赤色系 */
+        margin-top: 45px; /* 3倍に拡大 */
+        padding: 45px 60px; /* 3倍に拡大 */
+        font-size: 48px; /* 3倍に拡大 */
+        min-height: 132px; /* タッチターゲットを3倍に拡大 */
+      }
+      .btn-danger:hover, .cancel-button:hover {
+        background-color: #c82333;
       }
       
       /* ボタングループ */
@@ -345,7 +361,7 @@
           font-size: 48px; /* 3倍に拡大 */
           min-height: 150px; /* タッチターゲットを3倍に拡大 */
         }
-        #scan-book-id-button, #scan-user-button {
+        .btn-utility, #scan-book-id-button, #scan-user-button {
             margin-bottom: 30px; /* スキャンボタン下のスペースを3倍に拡大 */
             padding: 45px; /* 3倍に拡大 */
         }
@@ -360,7 +376,7 @@
         }
         
         /* 貸出ボタンの調整 */
-        button[onclick="submitForm()"] {
+        .btn-action, button[onclick="submitForm()"] {
             padding: 45px; /* 3倍に拡大 */
             font-size: 54px; /* 3倍に拡大 */
             margin-top: 60px; /* 3倍に拡大 */

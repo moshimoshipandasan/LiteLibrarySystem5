@@ -76,8 +76,8 @@
         background-color: #e9ecef;
         cursor: not-allowed;
       }
+      /* 基本ボタンスタイル */
       button {
-        background-color: #0056b3;
         color: white;
         padding: 45px 60px; /* ボタンのパディングを3倍に拡大 */
         border: none;
@@ -91,9 +91,18 @@
         -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを無効化 */
         touch-action: manipulation; /* タッチ操作の最適化 */
         min-height: 132px; /* タッチターゲットを3倍に拡大 */
+        background-color: #0056b3; /* 基本は青色 */
       }
       button:hover {
         background-color: #004494;
+      }
+      button:disabled {
+        background-color: #cccccc;
+        color: #999999;
+        cursor: not-allowed;
+        opacity: 0.7;
+        border: 3px solid #bbbbbb; /* 3倍に拡大 */
+        box-shadow: none;
       }
       /* スキャンボタンは少し小さく */
       #scan-book-id-button { /* ID修正 */
@@ -375,7 +384,7 @@
         <div id="interactive" class="viewport"></div>
       </div>
 
-      <button onclick="searchRentalRecords()">検索</button>
+      <button class="btn-utility" onclick="searchRentalRecords()">検索</button>
       <p id="message"></p>
 
       <div id="rental-records" style="display: none;">

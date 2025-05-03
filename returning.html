@@ -65,8 +65,8 @@
         -webkit-appearance: none; /* iOSでの入力欄スタイルをリセット */
         appearance: none;
       }
+      /* 基本ボタンスタイル */
       button {
-        background-color: #0056b3;
         color: white;
         padding: 45px 60px; /* ボタンのパディングを3倍に拡大 */
         border: none;
@@ -80,37 +80,46 @@
         -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを無効化 */
         touch-action: manipulation; /* タッチ操作の最適化 */
         min-height: 132px; /* タッチターゲットを3倍に拡大 */
+        background-color: #0056b3; /* 基本は青色 */
       }
       button:hover {
         background-color: #004494;
       }
-      /* スキャンボタンは少し小さく */
-      #scan-book-id-button {
-         padding: 36px 60px; /* スキャンボタンのパディングを3倍に拡大 */
-         background-color: #6c757d; /* グレー系 */
-         margin-right: 30px; /* 3倍に拡大 */
-         font-size: 48px; /* フォントサイズを3倍に拡大 */
-         font-weight: 400; /* 通常の太さ */
+      /* 機能別ボタン */
+      /* 補助ボタン - スキャン・検索用 */
+      .btn-utility, #scan-book-id-button {
+        padding: 36px 60px; /* スキャンボタンのパディングを3倍に拡大 */
+        background-color: #6c757d; /* グレー系 */
+        margin-right: 30px; /* 3倍に拡大 */
+        font-size: 48px; /* フォントサイズを3倍に拡大 */
+        font-weight: 400; /* 通常の太さ */
       }
-       #scan-book-id-button:hover {
-         background-color: #5a6268;
+      .btn-utility:hover, #scan-book-id-button:hover {
+        background-color: #5a6268;
       }
-      /* 返却ボタン */
-      #bulk-return-button {
-          display: block; /* ブロック要素にして幅を100%に */
-          width: 100%;
-          margin-top: 90px; /* 上マージンを3倍に拡大 */
-          background-color: #dc3545; /* 警告の色 */
-          padding: 45px 60px; /* ボタンのパディングを3倍に拡大 */
-          font-size: 54px; /* ボタン文字サイズを3倍に拡大 */
-          min-height: 150px; /* タッチターゲットを3倍に拡大 */
+      .btn-utility:disabled, #scan-book-id-button:disabled {
+        background-color: #cccccc;
       }
-      #bulk-return-button:hover {
-          background-color: #c82333;
+      
+      /* 危険ボタン - 返却・キャンセル用 */
+      .btn-danger, #bulk-return-button {
+        display: block; /* ブロック要素にして幅を100%に */
+        width: 100%;
+        margin-top: 90px; /* 上マージンを3倍に拡大 */
+        background-color: #dc3545; /* 赤色系 - 警告の色 */
+        padding: 45px 60px; /* ボタンのパディングを3倍に拡大 */
+        font-size: 54px; /* ボタン文字サイズを3倍に拡大 */
+        min-height: 150px; /* タッチターゲットを3倍に拡大 */
       }
-      #bulk-return-button:disabled {
-          background-color: #ccc;
-          cursor: not-allowed;
+      .btn-danger:hover, #bulk-return-button:hover {
+        background-color: #c82333;
+      }
+      .btn-danger:disabled, #bulk-return-button:disabled {
+        background-color: #cccccc;
+        color: #999999;
+        cursor: not-allowed;
+        opacity: 0.7;
+        border: 3px solid #bbbbbb; /* 3倍に拡大 */
       }
       
       /* チェックボックス */
@@ -331,7 +340,7 @@
         <div id="interactive" class="viewport" style="display: none;"></div> <!-- 初期非表示 -->
       </div>
 
-      <button onclick="searchUnreturnedBooks()">検索</button>
+      <button class="btn-utility" onclick="searchUnreturnedBooks()">検索</button>
       
       <div id="rental-records" style="display: none;">
         <h2>未返却書籍</h2>
